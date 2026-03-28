@@ -15,24 +15,27 @@ namespace XGZP6859D {
         pins.i2cWriteNumber(0x6D, 0x08, NumberFormat.UInt8BE)
         let r8 = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
         let raw = r6 * 65536 + r7 * 256 + r8
-        if (raw == 8388607) {
-            return 40000
+        if (raw <= 8388607) {
+            return raw / 512
         }
-        if (raw >= 8388608) {
-            return (raw - 16777216) / 512
-        }
-        return raw / 512
+        return (raw - 16777216) / 512
     }
 
     //% block="pression 0-40kPa en Pa"
     //% weight=100
     export function pressionPa(): number {
-        return lire()
+        let val = lire()
+        if (val > 40000) return 40000
+        if (val < 0) return 0
+        return val
     }
 
     //% block="pression 0-40kPa en kPa"
     //% weight=90
     export function pressionKPa(): number {
-        return lire() / 1000
+        let val = lire() / 1000
+        if (val > 40) return 40
+        if (val < 0) return 0
+        return val
     }
 }
