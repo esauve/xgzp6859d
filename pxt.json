@@ -1,7 +1,7 @@
 {
     "name": "xgzp6859d",
-    "version": "1.0.6",
-    "description": "Capteur de pression XGZP6859D pour micro:bit",
+    "version": "1.0.7",
+    "description": "Capteur de pression XGZP6859D pour micro:bit par E.Sauvé CSS de Laval",
     "dependencies": {
         "core": "*"
     },
