@@ -3,15 +3,9 @@
     "version": "0.0.1",
     "description": "Capteur de pression XGZP6859D pour micro:bit",
     "dependencies": {
-        "device": "*"
+        "core": "*"
     },
     "files": [
         "main.ts"
-    ],
-    "targetVersions": {
-        "target": "1.0.0"
-    },
-    "supportedTargets": [
-        "microbit"
     ]
 }
