@@ -24,9 +24,9 @@ export function pressionPa(): number {
     r8 = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
     let raw = r6 * 65536 + r7 * 256 + r8
     if (raw >= 8388608) {
-        raw = raw - 16777216
+        return (raw - 16777216) / 512
     }
-    if (raw >= 8388607) {
+    if (raw == 8388607) {
         return 40000
     }
     return raw / 512
