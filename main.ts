@@ -24,15 +24,15 @@ namespace XGZP6859D {
         return raw / 512
     }
 
-    //% block="pression en Pa"
+    //% block="pression 0-40kPa en Pa"
     //% weight=100
     export function pressionPa(): number {
-        return Math.round(lire() * 1000) / 1000
+        return lire()
     }
 
-    //% block="pression en kPa"
+    //% block="pression 0-40kPa en kPa"
     //% weight=90
     export function pressionKPa(): number {
-        return Math.round(lire() / 1000 * 1000) / 1000
+        return lire() / 1000
     }
 }
