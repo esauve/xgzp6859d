@@ -20,7 +20,7 @@ namespace XGZP6859D {
         if (raw >= 32768) {
             raw = raw - 65536
         }
-        return raw / 512
+        retrun (raw / 512) * -1
     }
 
     //% block="pression en kPa"
