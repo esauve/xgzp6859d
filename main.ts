@@ -12,19 +12,24 @@ namespace XGZP6859D {
         basic.pause(20)
     }
 
-    //% block="pression en kPa"
+    //% block="pression en Pa"
     //% weight=90
-    export function pressionKPa(): number {
+    export function pressionPa(): number {
         let reg = pins.createBuffer(1)
-        reg[0] = 0x06
+        reg[0] = 0x07
         pins.i2cWriteBuffer(0x6D, reg)
-        let data = pins.i2cReadBuffer(0x6D, 3)
-        let raw = data[0] * 65536 + data[1] * 256 + data[2]
-        if (raw >= 8388608) {
-            raw = raw - 16777216
+        let data = pins.i2cReadBuffer(0x6D, 2)
+        let raw = data[0] * 256 + data[1]
+        if (raw >= 32768) {
+            raw = raw - 65536
         }
-        // K=512 pour 0-40kPa, résultat en Pa puis converti en kPa
-        return raw / 512 / 1000
+        return raw / 512
+    }
+
+    //% block="pression en kPa"
+    //% weight=89
+    export function pressionKPa(): number {
+        return pressionPa() / 1000
     }
 
     //% block="température en °C"
