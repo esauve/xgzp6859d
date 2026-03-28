@@ -10,7 +10,7 @@ namespace XGZP6859D {
         basic.pause(20)
     }
 
-  //% block="pression en Pa"
+//% block="pression en Pa"
 //% weight=90
 export function pressionPa(): number {
     let r6 = 0
@@ -23,13 +23,17 @@ export function pressionPa(): number {
     pins.i2cWriteNumber(0x6D, 0x08, NumberFormat.UInt8BE)
     r8 = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
     let raw = r6 * 65536 + r7 * 256 + r8
-    if (raw == 8388607) {
-        return 40000
-    }
     if (raw >= 8388608) {
         raw = raw - 16777216
     }
-    return raw / 512
+    let pression = raw / 512
+    if (pression > 40000) {
+        return 40000
+    }
+    if (pression < -40000) {
+        return -40000
+    }
+    return pression
 }
     //% block="pression en kPa"
     //% weight=89
