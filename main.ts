@@ -16,9 +16,9 @@ namespace XGZP6859D {
         let r8 = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
         let raw = r6 * 65536 + r7 * 256 + r8
         if (raw <= 8388607) {
-            return raw / 512
+            return raw / 256
         }
-        return (raw - 16777216) / 512
+        return (raw - 16777216) / 256
     }
 
     //% block="pression 0-40kPa en Pa"
