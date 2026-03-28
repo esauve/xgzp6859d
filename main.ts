@@ -2,9 +2,7 @@
 //% block="XGZP6859D"
 namespace XGZP6859D {
 
-    //% block="pression en Pa"
-    //% weight=100
-    export function pressionPa(): number {
+    function lire(): number {
         let cmd = pins.createBuffer(2)
         cmd[0] = 0x30
         cmd[1] = 0x0A
@@ -26,9 +24,15 @@ namespace XGZP6859D {
         return raw / 512
     }
 
+    //% block="pression en Pa"
+    //% weight=100
+    export function pressionPa(): number {
+        return Math.round(lire() * 1000) / 1000
+    }
+
     //% block="pression en kPa"
     //% weight=90
     export function pressionKPa(): number {
-        return pressionPa() / 1000
+        return Math.round(lire() / 1000 * 1000) / 1000
     }
 }
