@@ -13,14 +13,15 @@ namespace XGZP6859D {
     //% block="pression en Pa"
     //% weight=90
     export function pressionPa(): number {
-        pins.i2cWriteNumber(0x6D, 0x07, NumberFormat.UInt8BE)
+        pins.i2cWriteNumber(0x6D, 0x06, NumberFormat.UInt8BE)
         let msb = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
+        let mid = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
         let lsb = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
-        let raw = msb * 256 + lsb
-        if (raw >= 32768) {
-            raw = raw - 65536
+        let raw = msb * 65536 + mid * 256 + lsb
+        if (raw >= 8388608) {
+            raw = raw - 16777216
         }
-        retrun (raw / 512) * -1
+        return (raw / 512) * -1
     }
 
     //% block="pression en kPa"
