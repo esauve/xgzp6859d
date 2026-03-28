@@ -2,19 +2,14 @@
 //% block="XGZP6859D"
 namespace XGZP6859D {
 
-    //% block="lire capteur XGZP6859D"
+    //% block="pression en Pa"
     //% weight=100
-    export function lireCapteur(): void {
+    export function pressionPa(): number {
         let cmd = pins.createBuffer(2)
         cmd[0] = 0x30
         cmd[1] = 0x0A
         pins.i2cWriteBuffer(0x6D, cmd)
         basic.pause(50)
-    }
-
-    //% block="pression en Pa"
-    //% weight=90
-    export function pressionPa(): number {
         pins.i2cWriteNumber(0x6D, 0x06, NumberFormat.UInt8BE)
         let r6 = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
         pins.i2cWriteNumber(0x6D, 0x07, NumberFormat.UInt8BE)
@@ -32,21 +27,8 @@ namespace XGZP6859D {
     }
 
     //% block="pression en kPa"
-    //% weight=89
+    //% weight=90
     export function pressionKPa(): number {
         return pressionPa() / 1000
-    }
-
-    //% block="température en °C"
-    //% weight=80
-    export function temperature(): number {
-        pins.i2cWriteNumber(0x6D, 0x09, NumberFormat.UInt8BE)
-        let msb = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
-        let lsb = pins.i2cReadNumber(0x6D, NumberFormat.UInt8BE)
-        let raw = msb * 256 + lsb
-        if (raw >= 32768) {
-            raw = raw - 65536
-        }
-        return raw / 256
     }
 }
