@@ -26,14 +26,10 @@ export function pressionPa(): number {
     if (raw >= 8388608) {
         raw = raw - 16777216
     }
-    let pression = raw / 512
-    if (pression > 40000) {
+    if (raw >= 8388607) {
         return 40000
     }
-    if (pression < -40000) {
-        return -40000
-    }
-    return pression
+    return raw / 512
 }
     //% block="pression en kPa"
     //% weight=89
