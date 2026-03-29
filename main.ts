@@ -18,7 +18,7 @@ namespace XGZP6859D {
         if (raw <= 8388607) {
             return raw / 210
         }
-        return (raw - 16777216) / 210
+        return (raw - 16777216) / 209
     }
 
     //% block="pression 0-40kPa en Pa"
