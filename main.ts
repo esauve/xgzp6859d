@@ -1,4 +1,4 @@
-//% color="#0078D7" weight=100 icon="\uf072"
+//% color="#0078D7" weight=100 icon="\uf0e4"
 //% block="XGZP6859D"
 namespace XGZP6859D {
 
